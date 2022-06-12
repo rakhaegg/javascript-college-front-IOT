@@ -1,8 +1,9 @@
-import React from "react";
+import { Chart as ChartJS } from "chart.js/auto"
+import React from "react"
 import { Line } from "react-chartjs-2"
 
 
-class DataMQ extends React.Component {
+class DataTemperature extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,13 +16,33 @@ class DataMQ extends React.Component {
             temp: 0,
             twoMinutes: 0,
             second: 0,
+
         }
     }
     componentDidMount() {
+        console.log("Komponen Chart Terpasang")
+        // this.timerID = setInterval(
+        //     () => this.tick(),
+        //     1000
+        // )
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        )
 
     }
+
+    componentWillUnmount() {
+
+    }
+
+
+    /*
+        ! THIS FOR CONNECT TO IOT 
+    */
+
     tick() {
-        fetch('http://localhost:3001/api/mq')
+        fetch('http://localhost:3001/api/temperature')
             .then(response => response.json())
             .then(data => {
                 const last = data.length - 1;
@@ -38,7 +59,7 @@ class DataMQ extends React.Component {
 
                 })
 
-                this.props.handleLDR(this.state.realtime)
+                this.props.handleTemperature(this.state.realtime)
             })
 
 
@@ -62,21 +83,21 @@ class DataMQ extends React.Component {
 
             })
         }
+
     }
+
     updateTwoMinutes(sum) {
         this.setState({
             twoMinutes: sum
         })
     }
-    componentWillUnmount() {
-
-    }
     render() {
+
         const data = {
             labels: this.state.time,
             datasets: [
                 {
-                    label: 'Sensor LDR',
+                    label: 'Sensor Temperature',
                     fill: false,
                     lineTension: 0.5,
                     backgroundColor: 'rgba(75,192,192,1)',
@@ -84,6 +105,7 @@ class DataMQ extends React.Component {
                 }
             ]
         }
+
         return (
             <div>
                 <div className="row" style={{ position: 'relative', top: '400px' }}>
@@ -94,7 +116,7 @@ class DataMQ extends React.Component {
                                 <strong>Waktu : </strong>{this.state.date.toUTCString()}
                             </div>
                             <div class="alert alert-info">
-                                <strong>RealTime MQ : </strong> {this.state.realtime}
+                                <strong>RealTime Temperature : </strong> {this.state.realtime}
                             </div>
                         </div>
                         <div>
@@ -130,4 +152,4 @@ class DataMQ extends React.Component {
         )
     }
 }
-export default DataMQ
+export default DataTemperature

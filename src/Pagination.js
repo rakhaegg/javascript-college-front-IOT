@@ -1,32 +1,31 @@
-
 import React from "react";
-import AuthContext from "../../Context/Auth";
 
 
-class ShowSummary extends React.Component {
+class ShowPagination extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             dataResponse: [],
             codeResponse: 0,
-            page : [],
-            choosenPage:1
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVzZXItY29lcXpHNElZbHhxLVpONSIsImlhdCI6MTY1NTAwMTY5OH0.SypIkFi6VSz_d03_m1IMI3IgX5kmsgiE40eo3PpjxRk",
+            page: [],
+            choosenPage: 1
         }
-        this.setNumberPage = this.setNumberPage.bind(this)
         this.handleButton = this.handleButton.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
+        this.setNumberPage = this.setNumberPage.bind(this)
     }
-    static contextType = AuthContext
     componentDidMount() {
-       this.setNumberPage()
-       this.getData(1)
+        this.setNumberPage()
+        this.getData(1)
+
     }
     setNumberPage(){
         const requestOptions = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.context.token}`,
+                'Authorization': `Bearer ${this.state.token}`,
             }
         }
         fetch(`http://localhost:5000/users/summary`, requestOptions)
@@ -62,7 +61,7 @@ class ShowSummary extends React.Component {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.context.token}`,
+                'Authorization': `Bearer ${this.state.token}`,
             }
         }
         fetch(`http://localhost:5000/users/summary/page/${page}`, requestOptions)
@@ -87,7 +86,7 @@ class ShowSummary extends React.Component {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.context.token}`,
+                'Authorization': `Bearer ${this.state.token}`,
             }
         }
         fetch(`http://localhost:5000/users/summary/${e.target.value}`, requestOptions)
@@ -101,6 +100,7 @@ class ShowSummary extends React.Component {
         return (
             <div>
                 <h1>Tampil Summary</h1>
+                <h2>Code Response : {this.state.codeResponse}</h2>
                 <table className="table">
                     <thead>
                         <tr>
@@ -148,4 +148,4 @@ class ShowSummary extends React.Component {
         )
     }
 }
-export default ShowSummary
+export default ShowPagination

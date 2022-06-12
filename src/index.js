@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min'
 import { BrowserRouter as Router } from 'react-router-dom';
 import ShowLine from './ShowLine';
+import ShowPagination from './Pagination';
+import IndexPagination from './IndexPagination';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

@@ -24,7 +24,6 @@ class App extends React.Component {
       token: '',
       codeResponse: 0,
       isAuth: false,
-
     }
   }
   updateID = (e) => {

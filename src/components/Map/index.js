@@ -66,7 +66,10 @@ class ShowMap extends React.Component {
                 >
                     <div>
                         <h4>{this.state.date.toUTCString()}</h4>
-                        <h1>LDR : {this.props.sensorLDR}</h1>
+                        <h4>LDR : {this.props.sensorLDR}</h4>
+                        <h4>Temp : {this.props.sensorTemp}</h4>
+                        <h4>Hum : {this.props.sensorHum}</h4>
+                        
                     </div>
                 </InfoWindow>
             </Map>

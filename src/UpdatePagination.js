@@ -1,7 +1,8 @@
+
 import React from "react";
 
 
-class DataDHT extends React.Component{
+class UpdatePagination extends React.Component{
     constructor(props){
         super(props)
     }
@@ -14,9 +15,9 @@ class DataDHT extends React.Component{
     render(){
         return(
             <div>
-                
+                This is Update Page
             </div>
         )
     }
 }
-export default DataDHT
+export default UpdatePagination

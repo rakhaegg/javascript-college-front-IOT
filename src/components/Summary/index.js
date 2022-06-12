@@ -12,7 +12,13 @@ class Summary extends React.Component {
         super(props)
         this.state = {
             date: new Date(),
-            choose: ''
+            choose: '',
+            temperature :0,
+            humidity : 0,
+            ldr : 0,
+            mq : 0,
+            summary :'',
+            flame : 0
         }
         this.handleSend = this.handleSend.bind(this)
         this.handleChoose = this.handleChoose.bind(this)
@@ -52,12 +58,12 @@ class Summary extends React.Component {
             },
             body: JSON.stringify({
                 id_user: this.context.userId,
-                summary: "summaryReactDariReact",
-                summary_humidity: "summaryHumidityDariReact",
-                summary_temperature: "summaryTemperatureDariReact",
-                summary_ldr: "summaryLDRDariReact",
-                summary_flame: "summaryFlameDariReact",
-                summary_mq: "summaryMQDariReact"
+                summary: this.state.summary,
+                summary_humidity: this.state.humidity,
+                summary_temperature: this.state.temperature,
+                summary_ldr: this.state.ldr,
+                summary_flame: this.state.flame,
+                summary_mq: this.state.mq
             })
         }
         fetch("http://localhost:5000/users/summary", requestOptions)
@@ -65,6 +71,42 @@ class Summary extends React.Component {
             .then(data => console.log(data))
 
         e.preventDefault()
+    }
+    handleTemperatue = (e)=>{
+        console.log(e.target.value)
+        this.setState({
+            temperature : e.target.value
+        })
+    }
+    handleHumidity = (e)=>{
+        console.log(e.target.value)
+        this.setState({
+            humidity : e.target.value
+        })
+    }
+    handleLdr = (e)=>{
+        console.log(e.target.value)
+        this.setState({
+            ldr : e.target.value
+        })
+    }
+    handleMq = (e) =>{
+        console.log(e.target.value)
+        this.setState({
+            mq : e.target.value
+        })
+    }
+    handleFlame = (e)=>{
+        console.log(e.target.value)
+        this.setState({
+            flame : e.target.value
+        })
+    }
+    handleSummary = (e)=>{
+        console.log(e.target.value)
+        this.setState({
+            summary : e.target.value
+        })
     }
     render() {
         return (
@@ -81,32 +123,31 @@ class Summary extends React.Component {
                                 <strong>Waktu : </strong>{this.state.date.toUTCString()}
                             </div>
                             <form>
-                                <DropdownButton
-                                    alignRight
-                                    title="Sensor"
-                                    id="dropdown-menu-align-right"
-                                    onSelect={this.handleChoose}
-                                >
-                                    <Dropdown.Item eventKey="temperature">Temperature</Dropdown.Item>
-                                    <Dropdown.Item eventKey="humidity">Humidity</Dropdown.Item>
-                                    <Dropdown.Item eventKey="ldr">LDR</Dropdown.Item>
-                                    <Dropdown.Item eventKey="flame">Flame</Dropdown.Item>
-                                    <Dropdown.Item eventKey="smoke">Smoke</Dropdown.Item>
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item eventKey="some link">some link</Dropdown.Item>
-                                </DropdownButton>
-                                {this.state.choose == 'temperature' ? <h1>
-                                    Temperature
-
-                                </h1> : this.state.choose == 'humidity' ?
-                                    <h1>Humidity</h1> : this.state.choose == 'ldr' ? <h1>LDR</h1> : this.state.choose == 'flame' ? <h1>Flame</h1>
-                                        : this.state.choose == 'smoke' ? <h1>Smoke</h1> : <h1></h1>
-
-                                }
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Temperature</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Temperature" onChange={this.handleTemperatue}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Humidity</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Humidity" onChange={this.handleHumidity}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Flame</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="flame"  onChange={this.handleFlame}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">LDR</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ldr"  onChange={this.handleLdr}/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">MQ</label>
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="mq" onChange={this.handleMq}/>
+                                </div>
+                                <br></br>
                                 {/* <!-- Message input --> */}
                                 <div class="form-outline mb-4">
-                                    <textarea class="form-control" id="form4Example3" rows="4" ></textarea>
-                                    <label class="form-label" for="form4Example3">Laporan Kejadian </label>
+                                    <textarea class="form-control" id="form4Example3" rows="4"onChange={this.handleSummary} ></textarea>
+                                    <label class="form-label" for="form4Example3">Summary </label>
                                 </div>
                                 {/* <!-- Submit button --> */}
                                 <button type="submit" class="btn btn-primary btn-block mb-4" onClick={this.sendSummary}>Send</button>
