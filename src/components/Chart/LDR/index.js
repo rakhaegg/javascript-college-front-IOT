@@ -46,7 +46,7 @@ class DataLDR extends React.Component {
             .then(response => response.json())
             .then(data => {
                 const last = data.length - 1;
-            
+
                 this.setState({
                     second: this.state.second + 1,
                     temp: this.state.temp + 1,
