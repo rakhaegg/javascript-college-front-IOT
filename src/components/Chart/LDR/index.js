@@ -13,7 +13,7 @@ class DataLDR extends React.Component {
             time: [],
             userID: this.props.userID,
             realtime: 0,
-            temp: 1,
+            temp: 0,
             twoMinutes: 0,
             second: 0,
 
@@ -31,35 +31,22 @@ class DataLDR extends React.Component {
         )
 
     }
+
     componentWillUnmount() {
-        if (this.client) {
-            this.client.end()
-        }
+
     }
-    // tick() {
-    //     fetch('http://localhost:8082/api/sensor/')
-    //         .then(response => response.json())
-    //         .then(data => {
 
-    //             // const array = data.map((x, index) => {
 
-    //             //     return index.payload
-    //             // })
-    //             // this.setState({
-    //             //     payload : array
-    //             // })
+    /*
+        ! THIS FOR CONNECT TO IOT 
+    */
 
-    //             // console.log("Panjang " , this.state.payload.length)
-    //             this.setState({
-    //                 result : data
-    //             })
-    //         })
-    // }
     tick() {
-        fetch('http://localhost:8082/api/sensor/')
+        fetch('http://localhost:3001/api/ldr')
             .then(response => response.json())
             .then(data => {
                 const last = data.length - 1;
+            
                 this.setState({
                     second: this.state.second + 1,
                     temp: this.state.temp + 1,
@@ -69,9 +56,9 @@ class DataLDR extends React.Component {
                 })
                 this.setState({
                     realtime: data[last].payload,
-                    
+
                 })
-                
+
                 this.props.handleLDR(this.state.realtime)
             })
 
@@ -98,6 +85,7 @@ class DataLDR extends React.Component {
         }
 
     }
+
     updateTwoMinutes(sum) {
         this.setState({
             twoMinutes: sum
@@ -120,7 +108,6 @@ class DataLDR extends React.Component {
 
         return (
             <div>
-
                 <div className="row" style={{ position: 'relative', top: '400px' }}>
                     <h2>{this.props.sensor}</h2>
                     <div className="col">
@@ -139,6 +126,8 @@ class DataLDR extends React.Component {
                         </div>
                     </div>
                     <div className="col">
+                        <h3>{this.state.temp}</h3>
+
                         <figure class="figure" >
                             <Line className="figure-img img-fluid rounded"
                                 data={data}

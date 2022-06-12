@@ -24,10 +24,10 @@ class ShowChart extends React.Component {
         })
         console.log(this.state.valueLDR)
     }
+    
     render() {
         return (
             <div>
-                <Header />
                 <body>
                     <div className="container">
                         <br></br>
@@ -40,8 +40,8 @@ class ShowChart extends React.Component {
                                 <strong> lat: -1.2884,</strong>
                                 <strong>lng: 36.8233</strong>
                             </div>
-
-                            <DataLDR sensor="Light Dependent Resistors" handleLDR={this.handleValue}/>
+                        
+                            <DataLDR sensor="Light Dependent Resistors" handleLDR={this.handleValue} />
                             
                         </div>
 

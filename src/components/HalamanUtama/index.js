@@ -16,35 +16,29 @@ class HalamanUtama extends React.Component {
             userID: '',
             token: ''
         }
-        this.handleUserID = this.handleUserID.bind(this)
     }
     componentDidMount() {
-
+        this.setState({
+            userID: this.props.userID
+        })
     }
     componentWillUnmount() {
 
     }
-    handleUserID(value){
-        this.setState({
-            userID : value
-        })
-        
-    }
+
     render() {
         return (
-            
-            <div>
-               
- 
 
-                    <div>
-                  
-                            <Header />  
-                            <p>Halaman Utama</p>
-                            <Footer />
-                       
-                    </div>
-                
+            <div>
+                {console.log("USER ID ", this.props.userID)}
+
+
+                <div>
+
+                    <p>Halaman Utama</p>
+
+                </div>
+
 
             </div>
         )

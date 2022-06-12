@@ -17,7 +17,7 @@ const backgroundColour = {
 const Header = props => {
     return (
         <header>
-            <Navigation main="Kota Malang" map="Peta" crew="Daftar Tim" summary="Laporan"/>
+            <Navigation main="Kota Malang" map="Peta" crew="Daftar Tim" summary="Laporan" login="Login"/>
             <Backgrouund backgroundImage={backgroundImage} backgroundColour={backgroundColour} />      
         </header>
         

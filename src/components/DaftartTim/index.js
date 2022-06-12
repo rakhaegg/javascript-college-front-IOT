@@ -36,7 +36,6 @@ class DaftarTim extends React.Component {
         return (
 
             <div>
-                <Header/>
                 <body>
                 <div className="container">
                     <div className='row'>
@@ -47,7 +46,6 @@ class DaftarTim extends React.Component {
                     </div>
                 </div>
                 </body>
-                <Footer/>
             </div>
             
         )
